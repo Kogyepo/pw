@@ -1,3 +1,4 @@
+﻿const cors = require("cors");
 const express = require("express");
 const http = require("http");
 const mongoose = require("mongoose");
@@ -23,6 +24,13 @@ const allowedOrigins = [
     ? process.env.LOCAL_FRONTEND_URL
     : null
 ].filter(Boolean);
+
+app.set("trust proxy", 1);
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
 const io = socketIo(server, {
   cors: {
