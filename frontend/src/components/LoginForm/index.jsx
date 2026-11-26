@@ -1,0 +1,72 @@
+import { useForm } from "react-hook-form";
+import { Row } from "reactstrap";
+import { Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import _ from "lodash"
+import {login} from "../../services/api/auth"
+import styles from "./styles.module.scss";
+
+const LoginForm = ({ title, role, data }) => {
+  const { register, handleSubmit } = useForm();
+  const [isLogged, setLogged] = useState(false);
+
+  const onSubmit = (data) => login(data);
+
+const login = (data) => {
+    fetch("/api/auth/login", {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(data),
+    }).then((r) => r.json())
+      .then((response) => {
+        if (response.auth) {
+          setLogged(response.auth);
+        } else {
+          alert("Login failed");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
+  if (isLogged) {
+    return role === "admin" ? (
+      <Navigate to="/admin" replace={true} />
+    ) : (
+      <Navigate to="/user" replace={true} />
+    );
+  }
+
+  return (
+    <Row align="middle" justify="center">
+      <div className={styles.loginForm}>
+        <h2>{title}</h2>
+        <form className={styles.formLogin} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="name">Name:</label>
+            <input
+              id="name"
+              name="name"
+              required
+              {...register("name")}
+            />
+          </div>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor="password">Password:</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              required
+              {...register("password")}
+            />
+          </div>
+          <input className="submit" type="submit" />
+        </form>
+      </div>
+    </Row>
+  );
+};
+
+export default LoginForm;

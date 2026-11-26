@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.row {
+    width: 100%;
+}
+
+.form {
+    width: 100%;
+    padding: 5px;
+}
+
+.field {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+
+    .label {
+        width: 110px;
+    }
+
+    input {
+        flex: 1;
+        padding: 4px 8px;
+    }
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
