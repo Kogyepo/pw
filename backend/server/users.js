@@ -1,9 +1,9 @@
-const bodyParser = require("body-parser");
+﻿const bodyParser = require("body-parser");
 const express = require("express");
 const Members = require("../data/member");
 const Users = require("../data/users");
 const scopes = require("../data/users/scopes");
-const VerifyToken = require("../middleware/Token");
+const VerifyToken = require("../middleware/token");
 const cookieParser = require("cookie-parser");
 const User = require("../data/users/users");
 const { isKeyObject } = require("node:util/types");
@@ -256,3 +256,4 @@ const UsersRouter = (io) => {
 };
 
 module.exports = UsersRouter;
+

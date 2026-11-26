@@ -1,9 +1,9 @@
-const bodyParser = require("body-parser");
+﻿const bodyParser = require("body-parser");
 const express = require("express");
 const Tickets = require("../data/tickets");
 const Users = require("../data/users");
 const scopes = require("../data/users/scopes");
-const VerifyToken = require("../middleware/Token");
+const VerifyToken = require("../middleware/token");
 const cookieParser = require("cookie-parser");
 
 const TicketsRouter = () => {
@@ -128,3 +128,4 @@ const TicketsRouter = () => {
 };
 
 module.exports = TicketsRouter;
+
