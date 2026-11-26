@@ -1,3 +1,4 @@
+﻿import { apiFetch } from "../../../services/api/config";
 import { useCallback, useState } from "react";
 
 export const useAuth = () => {
@@ -6,7 +7,7 @@ export const useAuth = () => {
 
     const hasLogin = useCallback(() => {
         setFeching(true);
-        fetch('/api/auth/me', {
+        apiFetch('/auth/me', {
             headers: { 'Accept': 'application/json' }
         })
         .then((response) => response.json())
@@ -26,3 +27,4 @@ export const useAuth = () => {
         isFetching
     }
 }
+

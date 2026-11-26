@@ -1,5 +1,7 @@
+﻿import { apiFetch } from "./config";
+
 export const login = (data) =>
-  fetch("/api/auth/login", {
+  apiFetch("/auth/login", {
     headers: { "Content-Type": "application/json" },
     method: "POST",
     body: JSON.stringify(data),

@@ -1,7 +1,8 @@
+﻿import { apiOrigin } from "../services/api/config";
 import { io } from "socket.io-client";
 
 // Create socket instance using the proxy (no need for full URL)
-const socket = io();
+const socket = apiOrigin ? io(apiOrigin, { withCredentials: true }) : io();
 
 export const initSocket = () => {
   console.log("Inicializando socket...");
@@ -37,3 +38,4 @@ export const socketAddListener = (listener = "", callback = () => {}) => {
 export const socketRemoveListener = (listener = "", callback = () => {}) => {
   socket.off(listener, callback);
 };
+

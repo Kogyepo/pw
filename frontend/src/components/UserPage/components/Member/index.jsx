@@ -1,3 +1,4 @@
+﻿import { apiOrigin } from "../../../../services/api/config";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Button } from "reactstrap";
@@ -11,7 +12,7 @@ import { useGetMember } from "../../../../hooks/useGetMember";
 import { createMember, getMember } from "../../../../services/api/member"; 
 
 export const Member = ({ user }) => {
-  const localhost = "http://127.0.0.1:5000";
+  const photoOrigin = apiOrigin || "http://127.0.0.1:5000";
   const [showForm, setShowForm] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
   
@@ -74,7 +75,7 @@ export const Member = ({ user }) => {
           <p>Tax Number: {member.taxNumber}</p>
           <p>Photo:</p>
           {/* Se a API devolver o caminho da foto, podes mostrar assim: */}
-          {/* <img src={`${localhost}/${member.photo}`} alt="Profile" /> */}
+          {member.photo && <img src={`${photoOrigin}/${member.photo.replace(/^\/+/, "")}`} alt="Profile" />}
         </>
       )}
     </Container>
